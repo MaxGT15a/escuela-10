@@ -77,7 +77,7 @@ class GrupoServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        curso = Curso.builder().id(1L).nombre("Matemáticas I").descripcion("Fundamentos").creditos(6).build();
+        curso = Curso.builder().id(1L).nombre("Matemáticas 6/7").descripcion("Fundamentos de mogging").creditos(67).build();
         maestro = Maestro.builder().id(1L).nombre("Laura").apellidoPaterno("Martínez")
                 .apellidoMaterno("Martínez").email("laura@escuela.com").telefono("5551010789").build();
         aula = Aula.builder().id(1L).nombre("Aula 101").capacidad(30).build();
@@ -88,7 +88,7 @@ class GrupoServiceImplTest {
 
         grupoResponse = new GrupoResponseDTO(
                 1L,
-                new DatosCursoDTO("Matemáticas I", "Fundamentos", 6),
+                new DatosCursoDTO("Matemáticas 6/7", "Fundamentos de mogging", 67),
                 new DatosMaestroDTO("Laura Martínez Martínez", "laura@escuela.com", "5551010789"),
                 new DatosAulaDTO("Aula 101", 30),
                 List.of("Lunes 08:00 - 10:00"),

@@ -17,7 +17,7 @@ public enum DiaSemana {
     private final String description;
     
     public static DiaSemana obtenerDiaPorDescripcion(String description){
-        StringCustomUtils.validarNoVacioNoNull(description, "El horario es requerido");
+        StringCustomUtils.validarNoVacioNoNull(description, "El día de la semana es requerido");
         String descripcionNormalizada = StringCustomUtils.normalizarTexto(description);
 
         for (DiaSemana diaSemana : values()){

@@ -25,7 +25,6 @@ class MaestroTest {
     }
 
     // ---------- crear ----------
-
     @Test
     void crear_debeCrearMaestro_cuandoDatosSonValidos() {
         Maestro maestro = Maestro.crear(

@@ -45,7 +45,7 @@ class HorarioControllerTest {
     private HorarioResponseDTO responseValida() {
         return new HorarioResponseDTO(
                 1L,
-                new DatosGrupoDTO("Matemáticas I", "Laura Martínez Martínez", "Aula 101", "2026-01"),
+                new DatosGrupoDTO("Matemáticas 6/7", "Laura Martínez Martínez", "Aula 101", "2026-01"),
                 "Lunes 08:00 - 10:00"
         );
     }
@@ -60,7 +60,7 @@ class HorarioControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(1))
                 .andExpect(jsonPath("$[0].id").value(1))
-                .andExpect(jsonPath("$[0].grupo.curso").value("Matemáticas I"))
+                .andExpect(jsonPath("$[0].grupo.curso").value("Matemáticas 6/7"))
                 .andExpect(jsonPath("$[0].grupo.maestro").value("Laura Martínez Martínez"))
                 .andExpect(jsonPath("$[0].grupo.aula").value("Aula 101"))
                 .andExpect(jsonPath("$[0].grupo.periodo").value("2026-01"))
@@ -86,7 +86,7 @@ class HorarioControllerTest {
         mockMvc.perform(get(URL + "/{id}", 1L))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.grupo.curso").value("Matemáticas I"))
+                .andExpect(jsonPath("$.grupo.curso").value("Matemáticas 6/7"))
                 .andExpect(jsonPath("$.grupo.maestro").value("Laura Martínez Martínez"))
                 .andExpect(jsonPath("$.grupo.aula").value("Aula 101"))
                 .andExpect(jsonPath("$.grupo.periodo").value("2026-01"))
@@ -130,7 +130,7 @@ class HorarioControllerTest {
                         .content(objectMapper.writeValueAsString(requestValido())))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.grupo.curso").value("Matemáticas I"))
+                .andExpect(jsonPath("$.grupo.curso").value("Matemáticas 6/7"))
                 .andExpect(jsonPath("$.grupo.maestro").value("Laura Martínez Martínez"))
                 .andExpect(jsonPath("$.grupo.aula").value("Aula 101"))
                 .andExpect(jsonPath("$.grupo.periodo").value("2026-01"))
@@ -326,7 +326,7 @@ class HorarioControllerTest {
                         .content(objectMapper.writeValueAsString(requestValido())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.grupo.curso").value("Matemáticas I"))
+                .andExpect(jsonPath("$.grupo.curso").value("Matemáticas 6/7"))
                 .andExpect(jsonPath("$.grupo.maestro").value("Laura Martínez Martínez"))
                 .andExpect(jsonPath("$.grupo.aula").value("Aula 101"))
                 .andExpect(jsonPath("$.grupo.periodo").value("2026-01"))

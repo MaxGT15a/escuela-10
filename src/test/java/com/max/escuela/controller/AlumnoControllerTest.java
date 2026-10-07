@@ -46,11 +46,11 @@ class AlumnoControllerTest {
     private AlumnoResponseDTO responseValida() {
         return new AlumnoResponseDTO(
                 1L,
-                "Carlos González Ramírez",
-                "carlos.gonzalez@alumnos.com",
+                "Mauricio García Ramírez",
+                "maugario.ramirez@alumnos.com",
                 "A2026001",
                 "10/01/2026",
-                List.of(new DatosCalificacionDTO("Matemáticas I", "2026-1", new BigDecimal("8.5"))),
+                List.of(new DatosCalificacionDTO("Matemáticas 6/7", "2026-1", new BigDecimal("8.5"))),
                 new BigDecimal("8.5")
         );
     }
@@ -65,12 +65,12 @@ class AlumnoControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(1))
                 .andExpect(jsonPath("$[0].id").value(1))
-                .andExpect(jsonPath("$[0].nombre").value("Carlos González Ramírez"))
-                .andExpect(jsonPath("$[0].email").value("carlos.gonzalez@alumnos.com"))
+                .andExpect(jsonPath("$[0].nombre").value("Mauricio García Ramírez"))
+                .andExpect(jsonPath("$[0].email").value("maugario.ramirez@alumnos.com"))
                 .andExpect(jsonPath("$[0].matricula").value("A2026001"))
                 .andExpect(jsonPath("$[0].fechaIngreso").value("10/01/2026"))
                 .andExpect(jsonPath("$[0].calificaciones.length()").value(1))
-                .andExpect(jsonPath("$[0].calificaciones[0].curso").value("Matemáticas I"))
+                .andExpect(jsonPath("$[0].calificaciones[0].curso").value("Matemáticas 6/7"))
                 .andExpect(jsonPath("$[0].calificaciones[0].calificacion").value(8.5))
                 .andExpect(jsonPath("$[0].promedio").value(8.5));
     }
@@ -94,12 +94,12 @@ class AlumnoControllerTest {
         mockMvc.perform(get(URL + "/{id}", 1L))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.nombre").value("Carlos González Ramírez"))
-                .andExpect(jsonPath("$.email").value("carlos.gonzalez@alumnos.com"))
+                .andExpect(jsonPath("$.nombre").value("Mauricio García Ramírez"))
+                .andExpect(jsonPath("$.email").value("maugario.ramirez@alumnos.com"))
                 .andExpect(jsonPath("$.matricula").value("A2026001"))
                 .andExpect(jsonPath("$.fechaIngreso").value("10/01/2026"))
                 .andExpect(jsonPath("$.calificaciones.length()").value(1))
-                .andExpect(jsonPath("$.calificaciones[0].curso").value("Matemáticas I"))
+                .andExpect(jsonPath("$.calificaciones[0].curso").value("Matemáticas 6/7"))
                 .andExpect(jsonPath("$.calificaciones[0].calificacion").value(8.5))
                 .andExpect(jsonPath("$.promedio").value(8.5));
     }
@@ -141,12 +141,12 @@ class AlumnoControllerTest {
                         .content(objectMapper.writeValueAsString(requestValido())))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.nombre").value("Carlos González Ramírez"))
-                .andExpect(jsonPath("$.email").value("carlos.gonzalez@alumnos.com"))
+                .andExpect(jsonPath("$.nombre").value("Mauricio García Ramírez"))
+                .andExpect(jsonPath("$.email").value("maugario.ramirez@alumnos.com"))
                 .andExpect(jsonPath("$.matricula").value("A2026001"))
                 .andExpect(jsonPath("$.fechaIngreso").value("10/01/2026"))
                 .andExpect(jsonPath("$.calificaciones.length()").value(1))
-                .andExpect(jsonPath("$.calificaciones[0].curso").value("Matemáticas I"))
+                .andExpect(jsonPath("$.calificaciones[0].curso").value("Matemáticas 6/7"))
                 .andExpect(jsonPath("$.calificaciones[0].calificacion").value(8.5))
                 .andExpect(jsonPath("$.promedio").value(8.5));
 
@@ -191,7 +191,7 @@ class AlumnoControllerTest {
 
     @Test
     void registrar_debeRetornar400_cuandoElApellidoPaternoEstaVacio() throws Exception {
-        AlumnoRequestDTO request = new AlumnoRequestDTO("Carlos", "", "Ramírez");
+        AlumnoRequestDTO request = new AlumnoRequestDTO("Mauricio", "", "Ramírez");
 
         mockMvc.perform(post(URL)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -203,7 +203,7 @@ class AlumnoControllerTest {
 
     @Test
     void registrar_debeRetornar400_cuandoElApellidoPaternoEsMuyCorto() throws Exception {
-        AlumnoRequestDTO request = new AlumnoRequestDTO("Carlos", "Paz", "Ramírez");
+        AlumnoRequestDTO request = new AlumnoRequestDTO("Mauricio", "Ga", "Ramírez");
 
         mockMvc.perform(post(URL)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -215,7 +215,7 @@ class AlumnoControllerTest {
 
     @Test
     void registrar_debeRetornar400_cuandoElApellidoMaternoEstaVacio() throws Exception {
-        AlumnoRequestDTO request = new AlumnoRequestDTO("Carlos", "González", "");
+        AlumnoRequestDTO request = new AlumnoRequestDTO("Mauricio", "González", "");
 
         mockMvc.perform(post(URL)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -227,7 +227,7 @@ class AlumnoControllerTest {
 
     @Test
     void registrar_debeRetornar400_cuandoElApellidoMaternoEsMuyCorto() throws Exception {
-        AlumnoRequestDTO request = new AlumnoRequestDTO("Carlos", "González", "Gil");
+        AlumnoRequestDTO request = new AlumnoRequestDTO("Mauricio", "García", "Gil");
 
         mockMvc.perform(post(URL)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -239,7 +239,7 @@ class AlumnoControllerTest {
 
     @Test
     void registrar_debeRetornar400_cuandoElNombreEsNulo() throws Exception {
-        AlumnoRequestDTO request = new AlumnoRequestDTO(null, "González", "Ramírez");
+        AlumnoRequestDTO request = new AlumnoRequestDTO(null, "García", "Ramírez");
 
         mockMvc.perform(post(URL)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -268,12 +268,12 @@ class AlumnoControllerTest {
                         .content(objectMapper.writeValueAsString(requestValido())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.nombre").value("Carlos González Ramírez"))
-                .andExpect(jsonPath("$.email").value("carlos.gonzalez@alumnos.com"))
+                .andExpect(jsonPath("$.nombre").value("Mauricio García Ramírez"))
+                .andExpect(jsonPath("$.email").value("maugario.ramirez@alumnos.com"))
                 .andExpect(jsonPath("$.matricula").value("A2026001"))
                 .andExpect(jsonPath("$.fechaIngreso").value("10/01/2026"))
                 .andExpect(jsonPath("$.calificaciones.length()").value(1))
-                .andExpect(jsonPath("$.calificaciones[0].curso").value("Matemáticas I"))
+                .andExpect(jsonPath("$.calificaciones[0].curso").value("Matemáticas 6/7"))
                 .andExpect(jsonPath("$.calificaciones[0].calificacion").value(8.5))
                 .andExpect(jsonPath("$.promedio").value(8.5));
     }
@@ -302,7 +302,7 @@ class AlumnoControllerTest {
 
     @Test
     void actualizar_debeRetornar400_cuandoElBodyEsInvalido() throws Exception {
-        AlumnoRequestDTO request = new AlumnoRequestDTO("", "González", "Ramírez");
+        AlumnoRequestDTO request = new AlumnoRequestDTO("", "García", "Ramírez");
 
         mockMvc.perform(put(URL + "/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON)

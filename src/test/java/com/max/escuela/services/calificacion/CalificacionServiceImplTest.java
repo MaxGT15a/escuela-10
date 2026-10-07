@@ -64,8 +64,8 @@ class CalificacionServiceImplTest {
                 .build();
 
         DatosInscripcionDTO datosInscripcion = new DatosInscripcionDTO(
-                new DatosAlumnoDTO("María Gómez Ramos", "A2025002", "maria.gomez@alumnos.com", "11/01/2025"),
-                new DatosGrupoDTO("Matemáticas I", "Laura Martínez Martínez", "Aula 101", "2025-01"),
+                new DatosAlumnoDTO("Mauricio García Ramírez", "A2025002", "maugario.ramirez@alumnos.com", "11/01/2025"),
+                new DatosGrupoDTO("Matemáticas 6/7", "Laura Martínez Martínez", "Aula 101", "2025-01"),
                 "11/02/2026");
 
         calificacionResponse = new CalificacionResponseDTO(

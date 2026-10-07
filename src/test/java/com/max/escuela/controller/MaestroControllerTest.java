@@ -48,7 +48,7 @@ class MaestroControllerTest {
                 "Laura Martínez Martínez",
                 "laura.martinez@escuela.com",
                 "5551010789",
-                List.of(new DatosCursoDTO("Matemáticas I", "Fundamentos matemáticos para nivel básico", 6))
+                List.of(new DatosCursoDTO("Matemáticas 6/7", "Fundamentos matemáticos para nivel básico", 6))
         );
     }
 
@@ -65,7 +65,7 @@ class MaestroControllerTest {
                 .andExpect(jsonPath("$[0].nombre").value("Laura Martínez Martínez"))
                 .andExpect(jsonPath("$[0].email").value("laura.martinez@escuela.com"))
                 .andExpect(jsonPath("$[0].telefono").value("5551010789"))
-                .andExpect(jsonPath("$[0].cursos[0].nombre").value("Matemáticas I"));
+                .andExpect(jsonPath("$[0].cursos[0].nombre").value("Matemáticas 6/7"));
     }
 
     @Test

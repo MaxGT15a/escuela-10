@@ -22,7 +22,7 @@ class AlumnoTest {
     private static final String MSG_MATRICULA = "La matricula es requerida y debe tener entre 5 y 10 caracteres";
 
     private static Alumno alumnoBase() {
-        return Alumno.crear("Carlos", "González", "Ramírez");
+        return Alumno.crear("Mauricio", "García", "Ramírez");
     }
 
     /** Inscripción con calificación; si nota es null, la calificación existe pero su valor es null. */
@@ -196,12 +196,12 @@ class AlumnoTest {
 
     @Test
     void cambioEnDatos_debeRetornarFalse_cuandoLosDatosSonIguales() {
-        assertThat(alumnoBase().cambioEnDatos("Carlos", "González", "Ramírez")).isFalse();
+        assertThat(alumnoBase().cambioEnDatos("Mauricio", "García", "Ramírez")).isFalse();
     }
 
     @Test
     void cambioEnDatos_debeIgnorarEspaciosAlrededor() {
-        assertThat(alumnoBase().cambioEnDatos("  Carlos ", " González", "Ramírez  ")).isFalse();
+        assertThat(alumnoBase().cambioEnDatos("  Mauricio ", " García", "Ramírez  ")).isFalse();
     }
 
     @ParameterizedTest
@@ -326,6 +326,6 @@ class AlumnoTest {
 
     @Test
     void obtenerNombreCompleto_debeConcatenarNombreYApellidos() {
-        assertThat(alumnoBase().obtenerNombreCompleto()).isEqualTo("Carlos González Ramírez");
+        assertThat(alumnoBase().obtenerNombreCompleto()).isEqualTo("Mauricio García Ramírez");
     }
 }

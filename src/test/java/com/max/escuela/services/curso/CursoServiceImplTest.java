@@ -53,12 +53,12 @@ class CursoServiceImplTest {
     void setUp() {
         curso = Curso.builder()
                 .id(1L)
-                .nombre("Matemáticas I")
-                .descripcion("Fundamentos matemáticos")
+                .nombre("Matemáticas 6/7")
+                .descripcion("Fundamentos de mogging")
                 .creditos(6)
                 .build();
 
-        cursoResponse = new CursoResponseDTO(1L, "Matemáticas I", "Fundamentos matemáticos", 6);
+        cursoResponse = new CursoResponseDTO(1L, "Matemáticas 6/7", "Fundamentos de mogging", 67);
     }
 
     // ---------- listar() ----------
@@ -91,7 +91,7 @@ class CursoServiceImplTest {
         CursoResponseDTO resultado = cursoService.obtenerPorId(1L);
 
         assertThat(resultado.id()).isEqualTo(1L);
-        assertThat(resultado.creditos()).isEqualTo(6);
+        assertThat(resultado.creditos()).isEqualTo(67);
     }
 
     @Test
@@ -187,7 +187,7 @@ class CursoServiceImplTest {
                 .isInstanceOf(ConflictException.class)
                 .hasMessageContaining("Ya existe un curso con el nombre: Historia I");
 
-        assertThat(curso.getNombre()).isEqualTo("Matemáticas I"); // sin cambios
+        assertThat(curso.getNombre()).isEqualTo("Matemáticas 6/7"); // sin cambios
         verify(cursoRepository, never()).saveAndFlush(any());
     }
 

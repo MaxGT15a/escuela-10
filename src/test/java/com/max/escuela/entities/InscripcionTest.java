@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class InscripcionTest {
 
-    private final Alumno alumno = Alumno.crear("Carlos", "González", "Ramírez");
+    private final Alumno alumno = Alumno.crear("Mauricio", "García", "Ramírez");
     private final Grupo grupo = Grupo.crear("2026-01");
 
     /** Inscripción ya vinculada a alumno y grupo (ambos lados de la relación). */

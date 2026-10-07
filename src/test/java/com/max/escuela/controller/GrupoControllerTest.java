@@ -47,7 +47,7 @@ class GrupoControllerTest {
     private GrupoResponseDTO responseValida() {
         return new GrupoResponseDTO(
                 1L,
-                new DatosCursoDTO("Matemáticas I", "Fundamentos matemáticos para nivel básico", 6),
+                new DatosCursoDTO("Matemáticas 6/7", "Fundamentos de mogging", 6),
                 new DatosMaestroDTO("Laura Martínez Martínez", "laura.martinez@escuela.com", "5551010789"),
                 new DatosAulaDTO("Aula 101", 30),
                 List.of("Lunes 10:00 - 12:00", "Miércoles 14:00 - 16:00"),
@@ -65,7 +65,7 @@ class GrupoControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(1))
                 .andExpect(jsonPath("$[0].id").value(1))
-                .andExpect(jsonPath("$[0].curso.nombre").value("Matemáticas I"))
+                .andExpect(jsonPath("$[0].curso.nombre").value("Matemáticas 6/7"))
                 .andExpect(jsonPath("$[0].curso.creditos").value(6))
                 .andExpect(jsonPath("$[0].maestro.nombre").value("Laura Martínez Martínez"))
                 .andExpect(jsonPath("$[0].maestro.email").value("laura.martinez@escuela.com"))
@@ -95,7 +95,7 @@ class GrupoControllerTest {
         mockMvc.perform(get(URL + "/{id}", 1L))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.curso.nombre").value("Matemáticas I"))
+                .andExpect(jsonPath("$.curso.nombre").value("Matemáticas 6/7"))
                 .andExpect(jsonPath("$.curso.creditos").value(6))
                 .andExpect(jsonPath("$.maestro.nombre").value("Laura Martínez Martínez"))
                 .andExpect(jsonPath("$.maestro.email").value("laura.martinez@escuela.com"))
@@ -143,7 +143,7 @@ class GrupoControllerTest {
                         .content(objectMapper.writeValueAsString(requestValido())))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.curso.nombre").value("Matemáticas I"))
+                .andExpect(jsonPath("$.curso.nombre").value("Matemáticas 6/7"))
                 .andExpect(jsonPath("$.curso.creditos").value(6))
                 .andExpect(jsonPath("$.maestro.nombre").value("Laura Martínez Martínez"))
                 .andExpect(jsonPath("$.maestro.email").value("laura.martinez@escuela.com"))
@@ -307,7 +307,7 @@ class GrupoControllerTest {
                         .content(objectMapper.writeValueAsString(requestValido())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.curso.nombre").value("Matemáticas I"))
+                .andExpect(jsonPath("$.curso.nombre").value("Matemáticas 6/7"))
                 .andExpect(jsonPath("$.curso.creditos").value(6))
                 .andExpect(jsonPath("$.maestro.nombre").value("Laura Martínez Martínez"))
                 .andExpect(jsonPath("$.maestro.email").value("laura.martinez@escuela.com"))

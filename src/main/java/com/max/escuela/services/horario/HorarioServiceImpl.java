@@ -5,16 +5,20 @@ import com.max.escuela.dto.horario.HorarioResponseDTO;
 import com.max.escuela.entities.Grupo;
 import com.max.escuela.entities.Horario;
 import com.max.escuela.enums.DiaSemana;
+import com.max.escuela.exceptions.InvalidDataException;
 import com.max.escuela.exceptions.RelatedEntityException;
 import com.max.escuela.mapper.HorarioMapper;
 import com.max.escuela.repositories.GrupoRepository;
 import com.max.escuela.repositories.HorarioRepository;
 import com.max.escuela.utils.ServiceUtils;
+import com.max.escuela.utils.StringCustomUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -41,6 +45,7 @@ public class HorarioServiceImpl implements HorarioService{
 
     @Override
     public HorarioResponseDTO registrar(HorarioRequestDTO request) {
+        log.info("Registrando horario");
         Grupo grupo = obtenerGrupo(request.idGrupo());
         DiaSemana dia = DiaSemana.obtenerDiaPorDescripcion(request.dia());
 
@@ -54,12 +59,15 @@ public class HorarioServiceImpl implements HorarioService{
 
     @Override
     public HorarioResponseDTO actualizar(HorarioRequestDTO request, Long id) {
+        log.info("Actualizando horario con id: {}", id);
         Horario horario = obtenerHorario(id);
         Grupo grupo = obtenerGrupo(request.idGrupo());
         DiaSemana dia = DiaSemana.obtenerDiaPorDescripcion(request.dia());
 
         if (horario.cambioEnDatos(request.dia(), request.horaInicio(), request.horaFin(), grupo)) {
+
             validarHorario(grupo, dia, request.horaInicio(), request.horaFin(), id);
+
             horario.actualizar(request.dia(), request.horaInicio(), request.horaFin(), grupo);
             horarioRepository.saveAndFlush(horario);
             log.info("Horario actualizado con id: {}", id);
@@ -91,15 +99,24 @@ public class HorarioServiceImpl implements HorarioService{
         );
     }
 
-    private void validarHorario(
-            Grupo grupo,
-            DiaSemana dia,
-            String horaInicio,
-            String horaFin,
-            Long idExcluir
+    private void validarHorario(Grupo grupo, DiaSemana dia, String horaInicio, String horaFin, Long idExcluir
     ) {
+        validarHoras(horaInicio, horaFin);
         if (horarioRepository.existeTraslape(dia, horaInicio, horaFin,
                 grupo.getPeriodo(), grupo.getId(), grupo.getAula().getId(), idExcluir))
             throw new RelatedEntityException("El horario se traslapa con otro del mismo grupo o aula");
+    }
+    private void validarHoras(String horaInicio, String horaFin) {
+        StringCustomUtils.validarNoVacioNoNull(horaInicio, "La hora de inicio es requerida");
+        StringCustomUtils.validarNoVacioNoNull(horaFin, "La hora de fin es requerida");
+        String horaInicioNormalizada = StringCustomUtils.normalizarTexto(horaInicio);
+        String horaFinNormalizada = StringCustomUtils.normalizarTexto(horaFin);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime inicio = LocalTime.parse(horaInicioNormalizada, formatter);
+        LocalTime fin = LocalTime.parse(horaFinNormalizada, formatter);
+
+        if (inicio.isAfter(fin))
+            throw new InvalidDataException("La hora de inicio no puede ser posterior a la hora de fin");
     }
 }
