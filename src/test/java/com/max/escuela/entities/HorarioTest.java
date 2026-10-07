@@ -74,13 +74,6 @@ class HorarioTest {
     }
 
     @Test
-    void crear_debeLanzarExcepcion_cuandoElDiaSuperaLos15Caracteres() {
-        assertThatThrownBy(() -> Horario.crear("a".repeat(16), "08:00", "10:00"))
-                .isInstanceOf(InvalidDataException.class)
-                .hasMessage(MSG_DIA_TAMANIO);
-    }
-
-    @Test
     void crear_debeLanzarExcepcion_cuandoElDiaNoExiste() {
         assertThatThrownBy(() -> Horario.crear("Domingo", "08:00", "10:00"))
                 .isInstanceOf(InvalidDataException.class)

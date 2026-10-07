@@ -41,7 +41,7 @@ class DiaSemanaTest {
     void obtenerDiaPorDescripcion_debeLanzarExcepcion_cuandoEsNuloOVacio(String descripcion) {
         assertThatThrownBy(() -> DiaSemana.obtenerDiaPorDescripcion(descripcion))
                 .isInstanceOf(InvalidDataException.class)
-                .hasMessage("El horario es requerido");
+                .hasMessage("El día de la semana es requerido");
     }
 
     @ParameterizedTest

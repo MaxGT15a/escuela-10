@@ -47,8 +47,8 @@ class InscripcionControllerTest {
     private InscripcionResponseDTO responseValida() {
         return new InscripcionResponseDTO(
                 1L,
-                new DatosAlumnoDTO("Carlos González Ramírez", "A2026001", "carlos.gonzalez@alumnos.com", "10/01/2026"),
-                new DatosGrupoDTO("Matemáticas I", "Laura Martínez Martínez", "Aula 101", "2026-01"),
+                new DatosAlumnoDTO("Mauricio García Ramírez", "A2026001", "maugario.ramirez@alumnos.com", "10/01/2026"),
+                new DatosGrupoDTO("Matemáticas 6/7", "Laura Martínez Martínez", "Aula 101", "2026-01"),
                 new BigDecimal("8.5"),
                 "15/01/2026"
         );
@@ -64,9 +64,9 @@ class InscripcionControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(1))
                 .andExpect(jsonPath("$[0].id").value(1))
-                .andExpect(jsonPath("$[0].alumno.nombre").value("Carlos González Ramírez"))
+                .andExpect(jsonPath("$[0].alumno.nombre").value("Mauricio García Ramírez"))
                 .andExpect(jsonPath("$[0].alumno.matricula").value("A2026001"))
-                .andExpect(jsonPath("$[0].grupo.curso").value("Matemáticas I"))
+                .andExpect(jsonPath("$[0].grupo.curso").value("Matemáticas 6/7"))
                 .andExpect(jsonPath("$[0].grupo.periodo").value("2026-01"))
                 .andExpect(jsonPath("$[0].calificacion").value(8.5))
                 .andExpect(jsonPath("$[0].fechaInscripcion").value("15/01/2026"));
@@ -91,9 +91,9 @@ class InscripcionControllerTest {
         mockMvc.perform(get(URL + "/{id}", 1L))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.alumno.nombre").value("Carlos González Ramírez"))
+                .andExpect(jsonPath("$.alumno.nombre").value("Mauricio García Ramírez"))
                 .andExpect(jsonPath("$.alumno.matricula").value("A2026001"))
-                .andExpect(jsonPath("$.grupo.curso").value("Matemáticas I"))
+                .andExpect(jsonPath("$.grupo.curso").value("Matemáticas 6/7"))
                 .andExpect(jsonPath("$.grupo.periodo").value("2026-01"))
                 .andExpect(jsonPath("$.calificacion").value(8.5))
                 .andExpect(jsonPath("$.fechaInscripcion").value("15/01/2026"));
@@ -136,9 +136,9 @@ class InscripcionControllerTest {
                         .content(objectMapper.writeValueAsString(requestValido())))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.alumno.nombre").value("Carlos González Ramírez"))
+                .andExpect(jsonPath("$.alumno.nombre").value("Mauricio García Ramírez"))
                 .andExpect(jsonPath("$.alumno.matricula").value("A2026001"))
-                .andExpect(jsonPath("$.grupo.curso").value("Matemáticas I"))
+                .andExpect(jsonPath("$.grupo.curso").value("Matemáticas 6/7"))
                 .andExpect(jsonPath("$.grupo.periodo").value("2026-01"))
                 .andExpect(jsonPath("$.calificacion").value(8.5))
                 .andExpect(jsonPath("$.fechaInscripcion").value("15/01/2026"));
@@ -249,9 +249,9 @@ class InscripcionControllerTest {
                         .content(objectMapper.writeValueAsString(requestValido())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.alumno.nombre").value("Carlos González Ramírez"))
+                .andExpect(jsonPath("$.alumno.nombre").value("Mauricio García Ramírez"))
                 .andExpect(jsonPath("$.alumno.matricula").value("A2026001"))
-                .andExpect(jsonPath("$.grupo.curso").value("Matemáticas I"))
+                .andExpect(jsonPath("$.grupo.curso").value("Matemáticas 6/7"))
                 .andExpect(jsonPath("$.grupo.periodo").value("2026-01"))
                 .andExpect(jsonPath("$.calificacion").value(8.5))
                 .andExpect(jsonPath("$.fechaInscripcion").value("15/01/2026"));

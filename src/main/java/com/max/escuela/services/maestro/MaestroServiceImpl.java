@@ -5,6 +5,7 @@ import com.max.escuela.dto.maestro.MaestroRequestDTO;
 import com.max.escuela.dto.maestro.MaestroResponseDTO;
 import com.max.escuela.entities.Maestro;
 import com.max.escuela.exceptions.ConflictException;
+import com.max.escuela.exceptions.NoSuchResourceException;
 import com.max.escuela.exceptions.RelatedEntityException;
 import com.max.escuela.mapper.CursoMapper;
 import com.max.escuela.mapper.MaestroMapper;
@@ -12,6 +13,7 @@ import com.max.escuela.repositories.CursoRepository;
 import com.max.escuela.repositories.GrupoRepository;
 import com.max.escuela.repositories.MaestroRepository;
 import com.max.escuela.utils.ServiceUtils;
+import com.max.escuela.utils.StringCustomUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -76,12 +78,13 @@ public class MaestroServiceImpl implements MaestroService{
                 request.email(),
                 request.telefono()
         )) {
-            validarCambiosUnicos(request.email(), request.telefono(), id);
+            validarCambiosUnicos(StringCustomUtils.normalizarTexto(request.email()),
+                    request.telefono(), id);
             maestro.actualizar(
                     request.nombre(),
                     request.apellidoPaterno(),
                     request.apellidoMaterno(),
-                    request.email(),
+                    StringCustomUtils.normalizarTexto(request.email()),
                     request.telefono()
             );
 
@@ -110,7 +113,7 @@ public class MaestroServiceImpl implements MaestroService{
     @Transactional(readOnly = true)
     public List<DatosCursoDTO> obtenerCursosDeUnMaestroConId(Long id){
         if(!maestroRepository.existsById(id))
-            throw new ConflictException("El maestro no existe con id: " + id);
+            throw new NoSuchResourceException("El maestro no existe con id: " + id);
 
         log.info("Listando cursos del maestro con id: {}", id);
 

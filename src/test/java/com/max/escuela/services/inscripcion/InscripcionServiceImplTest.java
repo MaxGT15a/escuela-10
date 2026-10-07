@@ -64,7 +64,7 @@ class InscripcionServiceImplTest {
     @BeforeEach
     void setUp() {
         alumno = Alumno.builder()
-                .id(10L).nombre("Carlos").apellidoPaterno("González").apellidoMaterno("Ramírez")
+                .id(10L).nombre("Mauricio").apellidoPaterno("García").apellidoMaterno("Ramírez")
                 .build();
 
         grupo = Grupo.builder().id(5L).periodo("2026-01").build();
@@ -80,8 +80,8 @@ class InscripcionServiceImplTest {
 
         inscripcionResponse = new InscripcionResponseDTO(
                 1L,
-                new DatosAlumnoDTO("Carlos González Ramírez", "GORA260101", "carlos@escuela.com", "10/01/2026"),
-                new DatosGrupoDTO("Matemáticas I", "Laura Martínez Martínez", "Aula 101", "2026-01"),
+                new DatosAlumnoDTO("Mauricio García Ramírez", "GORA260101", "maugario.ramirez@escuela.com", "10/01/2026"),
+                new DatosGrupoDTO("Matemáticas 6/7", "Laura Martínez Martínez", "Aula 101", "2026-01"),
                 null,
                 "11/02/2026");
     }

@@ -13,7 +13,7 @@ class GrupoTest {
 
     private static final String MSG_FORMATO_PERIODO = "El periodo debe tener el formato YYYY-MM";
 
-    private final Curso curso = Curso.crear("Matemáticas I", "Fundamentos", 6);
+    private final Curso curso = Curso.crear("Matemáticas 6/7", "Fundamentos", 6);
     private final Maestro maestro = Maestro.crear("Laura", "Martínez", "Martínez",
             "laura.martinez@escuela.com", "5551010789");
     private final Aula aula = Aula.crear("Aula 101", 30);

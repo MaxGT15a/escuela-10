@@ -184,22 +184,6 @@ class HorarioServiceImplTest {
         verify(horarioRepository, never()).saveAndFlush(any());
     }
 
-    @Disabled("Contrato: traslape = regla de negocio => 400 (DatoInvalidoException / IllegalArgumentException). " +
-            "Hoy se lanza EntidadRelacionadaException (409). Activa al corregirlo y elimina el test anterior.")
-    @Test
-    void registrar_debeLanzarDatoInvalido_cuandoHayTraslape() {
-        HorarioRequestDTO request = new HorarioRequestDTO(5L, "Lunes", "08:00", "10:00");
-        when(grupoRepository.findById(5L)).thenReturn(Optional.of(grupo));
-        when(horarioRepository.existeTraslape(
-                DiaSemana.LUNES, "08:00", "10:00", "2026-01", 5L, 3L, SIN_EXCLUIR)).thenReturn(true);
-
-        assertThatThrownBy(() -> horarioService.registrar(request))
-                .isInstanceOf(InvalidDataException.class);
-    }
-
-    @Disabled("Mejora pendiente: registrar() consulta el traslape ANTES de validar formato y orden de horas " +
-            "(esa validación ocurre en Horario.crear, dentro del mapper). Con horaFin <= horaInicio no " +
-            "debería llegar a consultar el repositorio. Activa al mover la validación antes de la consulta.")
     @Test
     void registrar_noDebeConsultarTraslape_cuandoLaHoraFinNoEsPosteriorALaDeInicio() {
         HorarioRequestDTO request = new HorarioRequestDTO(5L, "Lunes", "10:00", "08:00");
@@ -213,7 +197,6 @@ class HorarioServiceImplTest {
     }
 
     // ---------- actualizar() ----------
-
     @Test
     void actualizar_noDebeValidarNiGuardar_cuandoNoHayCambios() {
         HorarioRequestDTO request = new HorarioRequestDTO(5L, "Lunes", "08:00", "10:00");
