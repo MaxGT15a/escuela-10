@@ -37,12 +37,9 @@ public class Horario {
     private String horaFin;
 
     private static void validarDatos(
-        String diaSemana,
         String horaInicio,
         String horaFin
     ){
-        StringCustomUtils.validarNoVacioNoNull(diaSemana, "El día de la semana es requerido");
-        StringCustomUtils.validarTamanio(diaSemana, 1, 15, "El día de la semana debe tener entre 1 y 15 caracteres");
 
         StringCustomUtils.validarNoVacioNoNull(horaInicio, "La hora de inicio es requerida");
         TimeCustomUtils.validarFormatoHora(horaInicio, "El formato de hora inicio debe ser HH:mm");
@@ -72,35 +69,27 @@ public class Horario {
     ){
         if(grupo == null)
             throw new InvalidDataException("El grupo es requerido");
-        validarDatos(diaSemana, horaInicio, horaFin);
-        return !this.diaSemana.equals(DiaSemana.obtenerDiaPorDescriptcion(diaSemana)) ||
+        validarDatos( horaInicio, horaFin);
+        return !this.diaSemana.equals(DiaSemana.obtenerDiaPorDescripcion(diaSemana)) ||
                 !this.horaInicio.equals(horaInicio) ||
                 !this.horaFin.equals(horaFin) ||
                 !this.grupo.equals(grupo);
     }
 
-    public void actualizar(
-            String diaSemana,
-            String horaInicio,
-            String horaFin,
-            Grupo grupo
-    ){
-        validarDatos(diaSemana, horaInicio, horaFin);
-        this.diaSemana = DiaSemana.obtenerDiaPorDescriptcion(diaSemana);
+    public void actualizar(String diaSemana, String horaInicio, String horaFin, Grupo grupo){
+        validarDatos(horaInicio, horaFin);
+
+        this.diaSemana = DiaSemana.obtenerDiaPorDescripcion(diaSemana);
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
         this.grupo = grupo;
     }
 
-    public static Horario crear(
-            String diaSemana,
-            String horaInicio,
-            String horaFin
-    ){
-        validarDatos(diaSemana, horaInicio, horaFin);
+    public static Horario crear(String diaSemana, String horaInicio, String horaFin){
+        validarDatos(horaInicio, horaFin);
 
-      return Horario.builder()
-              .diaSemana(DiaSemana.obtenerDiaPorDescriptcion(diaSemana))
+        return Horario.builder()
+              .diaSemana(DiaSemana.obtenerDiaPorDescripcion(diaSemana))
               .horaInicio(horaInicio)
               .horaFin(horaFin)
               .build();

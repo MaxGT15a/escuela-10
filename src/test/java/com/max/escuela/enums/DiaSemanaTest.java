@@ -32,14 +32,14 @@ class DiaSemanaTest {
     void obtenerDiaPorDescriptcion_debeResolverElDia_ignorandoMayusculasAcentosYEspacios(
             String descripcion, DiaSemana esperado) {
 
-        assertThat(DiaSemana.obtenerDiaPorDescriptcion(descripcion)).isEqualTo(esperado);
+        assertThat(DiaSemana.obtenerDiaPorDescripcion(descripcion)).isEqualTo(esperado);
     }
 
     @ParameterizedTest
     @NullAndEmptySource
     @ValueSource(strings = {"   "})
-    void obtenerDiaPorDescriptcion_debeLanzarExcepcion_cuandoEsNuloOVacio(String descripcion) {
-        assertThatThrownBy(() -> DiaSemana.obtenerDiaPorDescriptcion(descripcion))
+    void obtenerDiaPorDescripcion_debeLanzarExcepcion_cuandoEsNuloOVacio(String descripcion) {
+        assertThatThrownBy(() -> DiaSemana.obtenerDiaPorDescripcion(descripcion))
                 .isInstanceOf(InvalidDataException.class)
                 .hasMessage("El horario es requerido");
     }
@@ -47,7 +47,7 @@ class DiaSemanaTest {
     @ParameterizedTest
     @ValueSource(strings = {"Domingo", "Lun", "Monday", "Lunes y martes"})
     void obtenerDiaPorDescriptcion_debeLanzarExcepcion_cuandoElDiaNoExiste(String descripcion) {
-        assertThatThrownBy(() -> DiaSemana.obtenerDiaPorDescriptcion(descripcion))
+        assertThatThrownBy(() -> DiaSemana.obtenerDiaPorDescripcion(descripcion))
                 .isInstanceOf(InvalidDataException.class)
                 .hasMessage("No existe un dia con descripcion: " + descripcion);
     }

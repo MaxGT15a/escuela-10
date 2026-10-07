@@ -82,6 +82,12 @@ public class Grupo {
         this.curso = curso;
     }
 
+    public void asignarDatosGrupo(Curso curso, Maestro maestro, Aula aula){
+        asignarCurso(curso);
+        asignarMaestro(maestro);
+        asignarAula(aula);
+    }
+
     public void agregarInscripcion(Inscripcion inscripcion) {
         if (inscripcion == null)
             throw new InvalidDataException("La inscripcion es requerida");
