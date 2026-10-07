@@ -42,7 +42,7 @@ public class HorarioServiceImpl implements HorarioService{
     @Override
     public HorarioResponseDTO registrar(HorarioRequestDTO request) {
         Grupo grupo = obtenerGrupo(request.idGrupo());
-        DiaSemana dia = DiaSemana.obtenerDiaPorDescriptcion(request.dia());
+        DiaSemana dia = DiaSemana.obtenerDiaPorDescripcion(request.dia());
 
         validarHorario(grupo, dia, request.horaInicio(), request.horaFin(), -1L);
 
@@ -56,7 +56,7 @@ public class HorarioServiceImpl implements HorarioService{
     public HorarioResponseDTO actualizar(HorarioRequestDTO request, Long id) {
         Horario horario = obtenerHorario(id);
         Grupo grupo = obtenerGrupo(request.idGrupo());
-        DiaSemana dia = DiaSemana.obtenerDiaPorDescriptcion(request.dia());
+        DiaSemana dia = DiaSemana.obtenerDiaPorDescripcion(request.dia());
 
         if (horario.cambioEnDatos(request.dia(), request.horaInicio(), request.horaFin(), grupo)) {
             validarHorario(grupo, dia, request.horaInicio(), request.horaFin(), id);

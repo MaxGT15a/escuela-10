@@ -16,18 +16,12 @@ public enum DiaSemana {
     SABADO("Sabado");
     private final String description;
     
-    public static DiaSemana obtenerDiaPorDescriptcion(String description){
+    public static DiaSemana obtenerDiaPorDescripcion(String description){
         StringCustomUtils.validarNoVacioNoNull(description, "El horario es requerido");
         String descripcionNormalizada = StringCustomUtils.normalizarTexto(description);
 
         for (DiaSemana diaSemana : values()){
-            if(
-                    StringCustomUtils
-                            .normalizarTexto(
-                                    diaSemana.getDescription()
-                            )
-                            .equals(descripcionNormalizada)
-            )
+            if(StringCustomUtils.normalizarTexto(diaSemana.getDescription()).equals(descripcionNormalizada))
                 return diaSemana;
         }
 

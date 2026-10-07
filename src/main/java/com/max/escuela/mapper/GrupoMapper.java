@@ -25,9 +25,7 @@ public class GrupoMapper implements CommonMapper<GrupoRequestDTO, GrupoResponseD
     public Grupo requestAEntidad(GrupoRequestDTO request, Curso curso, Maestro maestro, Aula aula) {
         Grupo grupo = requestAEntidad(request);
 
-        grupo.asignarCurso(curso);
-        grupo.asignarMaestro(maestro);
-        grupo.asignarAula(aula);
+        grupo.asignarDatosGrupo(curso, maestro, aula);
 
         return grupo;
     }
