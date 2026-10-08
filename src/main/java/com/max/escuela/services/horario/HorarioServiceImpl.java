@@ -107,16 +107,15 @@ public class HorarioServiceImpl implements HorarioService{
             throw new RelatedEntityException("El horario se traslapa con otro del mismo grupo o aula");
     }
     private void validarHoras(String horaInicio, String horaFin) {
-        StringCustomUtils.validarNoVacioNoNull(horaInicio, "La hora de inicio es requerida");
-        StringCustomUtils.validarNoVacioNoNull(horaFin, "La hora de fin es requerida");
-        String horaInicioNormalizada = StringCustomUtils.normalizarTexto(horaInicio);
-        String horaFinNormalizada = StringCustomUtils.normalizarTexto(horaFin);
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+            LocalTime inicio = LocalTime.parse(horaInicio, formatter);
+            LocalTime fin = LocalTime.parse(horaFin, formatter);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime inicio = LocalTime.parse(horaInicioNormalizada, formatter);
-        LocalTime fin = LocalTime.parse(horaFinNormalizada, formatter);
-
-        if (inicio.isAfter(fin))
-            throw new InvalidDataException("La hora de inicio no puede ser posterior a la hora de fin");
+            if (inicio.isAfter(fin))
+                throw new InvalidDataException("La hora de inicio no puede ser posterior a la hora de fin");
+        }
+       catch (Exception e) {
+           throw new InvalidDataException("Formato de hora incorrecto");}
     }
 }

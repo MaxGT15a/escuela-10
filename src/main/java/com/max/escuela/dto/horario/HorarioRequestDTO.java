@@ -1,10 +1,7 @@
 package com.max.escuela.dto.horario;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 @Schema(description = "Datos para registrar un horario")
 public record HorarioRequestDTO(
@@ -20,14 +17,12 @@ public record HorarioRequestDTO(
         String dia,
 
         @Schema(description = "Hora de inicio del horario", example = "08:00")
-        @NotBlank(message = "La hora de inicio es requerida")
         @NotNull(message = "La hora de inicio es requerida")
-        @Size(min = 5, max = 5, message = "La hora de inicio debe tener el formato HH:mm")
+        @Pattern(regexp = "^(?:[01]\\d|2[0-3]):[0-5]\\d$", message = "La hora de inicio debe tener el formato HH:mm válido (00:00 - 23:59)")
         String horaInicio,
 
         @Schema(description = "Hora de fin del horario", example = "10:00")
-        @NotBlank(message = "La hora de fin es requerida")
         @NotNull(message = "La hora de fin es requerida")
-        @Size(min = 5, max = 5, message = "La hora de fin debe tener el formato HH:mm")
+        @Pattern(regexp = "^(?:[01]\\d|2[0-3]):[0-5]\\d$", message = "La hora de fin debe tener el formato HH:mm válido (00:00 - 23:59)")
         String horaFin
 ) { }

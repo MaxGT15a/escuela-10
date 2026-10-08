@@ -44,13 +44,9 @@ public class CursoServiceImpl implements CursoService {
     @Override
     public CursoResponseDTO registrar(CursoRequestDTO request) {
 
-        Curso curso = Curso.crear(
-                request.nombre(),
-                request.descripcion(),
-                request.creditos()
-        );
+        validarDatosUnicos(request.nombre());
 
-        validarDatosUnicos(curso.getNombre());
+        Curso curso = cursoMapper.requestAEntidad(request);
 
         cursoRepository.saveAndFlush(curso);
 
@@ -64,13 +60,9 @@ public class CursoServiceImpl implements CursoService {
 
         Curso curso = obtenerCurso(id);
 
-        Curso cursoConCambios = Curso.crear(
-                request.nombre(),
-                request.descripcion(),
-                request.creditos()
-        );
+        validarCambiosUnicos(request.nombre(), id);
 
-        validarCambiosUnicos(cursoConCambios.getNombre(), id);
+        Curso cursoConCambios = cursoMapper.requestAEntidad(request);
 
         curso.actualizar(
                 cursoConCambios.getNombre(),
@@ -109,12 +101,12 @@ public class CursoServiceImpl implements CursoService {
     }
 
     private void validarDatosUnicos(String nombre){
-        if(cursoRepository.existsByNombre(nombre))
+        if(cursoRepository.existsByNombre(nombre.trim()))
             throw new ConflictException("Nombre del curso ya existente");
     }
 
     private void validarCambiosUnicos(String nombre, Long id){
-        if(cursoRepository.existsByNombreAndIdNot(nombre, id))
+        if(cursoRepository.existsByNombreAndIdNot(nombre.trim(), id))
             throw new ConflictException("Ya existe un curso con el nombre: " + nombre);
     }
 }

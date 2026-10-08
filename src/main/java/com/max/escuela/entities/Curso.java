@@ -55,10 +55,7 @@ public class Curso {
         this.creditos = creditos;
     }
 
-    public static Curso crear(
-        String nombre,
-        String descripcion,
-        Integer creditos
+    public static Curso crear(String nombre, String descripcion, Integer creditos
     ){
         validarDatos(nombre, creditos);
         return Curso.builder()

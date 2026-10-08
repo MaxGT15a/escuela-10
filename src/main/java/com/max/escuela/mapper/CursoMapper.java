@@ -4,14 +4,17 @@ import com.max.escuela.dto.curso.CursoRequestDTO;
 import com.max.escuela.dto.curso.CursoResponseDTO;
 import com.max.escuela.dto.datos.DatosCursoDTO;
 import com.max.escuela.entities.Curso;
+import com.max.escuela.exceptions.InvalidDataException;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CursoMapper implements CommonMapper<CursoRequestDTO, CursoResponseDTO, Curso>{
     @Override
     public Curso requestAEntidad(CursoRequestDTO request) {
-        return request == null ? null
-                : Curso.crear(
+        if (request == null) {
+            throw new InvalidDataException("El request de curso es nulo");
+        }
+        return Curso.crear(
                 request.nombre(),
                 request.descripcion(),
                 request.creditos()

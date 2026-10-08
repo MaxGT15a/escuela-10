@@ -52,7 +52,7 @@ public class GrupoServiceImpl implements GrupoService{
     @Override
     public GrupoResponseDTO registrar(GrupoRequestDTO request) {
         Curso curso = obtenerCurso(request.idCurso());
-        Maestro maestro = obterMaestro(request.idMaestro());
+        Maestro maestro = obtenerMaestro(request.idMaestro());
         Aula aula = obtenerAula(request.idAula());
 
         validarDatosUnicos(request);
@@ -75,15 +75,10 @@ public class GrupoServiceImpl implements GrupoService{
         Grupo grupo = obtenerGrupo(id);
 
         Curso curso = obtenerCurso(request.idCurso());
-        Maestro maestro = obterMaestro(request.idMaestro());
+        Maestro maestro = obtenerMaestro(request.idMaestro());
         Aula aula = obtenerAula(request.idAula());
 
-        if (grupo.cambioEnDatos(
-                curso,
-                maestro,
-                aula,
-                request.periodo()
-        )) {
+        if (grupo.cambioEnDatos(curso, maestro, aula, request.periodo())) {
             validarCambiosUnicos(request, id);
             grupo.actualizarDatos(
                     curso,
@@ -158,7 +153,7 @@ public class GrupoServiceImpl implements GrupoService{
         );
     }
 
-    private Maestro obterMaestro(Long id){
+    private Maestro obtenerMaestro(Long id){
         return ServiceUtils.obtenerEntidadOException(
                 maestroRepository,
                 id,
