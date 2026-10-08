@@ -13,12 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(
-        name = "AULAS",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "AULA_UK", columnNames = "NOMBRE")
-        }
-)
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

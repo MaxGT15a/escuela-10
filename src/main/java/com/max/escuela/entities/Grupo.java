@@ -125,9 +125,7 @@ public class Grupo {
     ){
         validarDatos(periodo);
         this.periodo = periodo;
-        asignarCurso(curso);
-        asignarMaestro(maestro);
-        asignarAula(aula);
+        asignarDatosGrupo(curso, maestro, aula);
     }
 
     public static Grupo crear(

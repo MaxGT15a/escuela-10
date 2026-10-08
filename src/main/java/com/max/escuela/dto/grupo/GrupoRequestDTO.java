@@ -23,6 +23,5 @@ public record GrupoRequestDTO(
         @Schema(description = "Periodo del grupo", example = "2025-01")
         @NotBlank(message = "El periodo es requerido")
         @Pattern(regexp = "^\\d{4}-\\d{2}$", message = "El periodo debe tener el formato YYYY-MM")
-        @Size(min = 6, max = 20, message = "El periodo debe tener entre 6 y 20 caracteres")
         String periodo
 ) { }

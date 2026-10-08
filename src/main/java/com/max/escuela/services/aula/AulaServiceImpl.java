@@ -43,12 +43,9 @@ public class AulaServiceImpl implements AulaService{
 
     @Override
     public AulaResponseDTO registrar(AulaRequestDTO request) {
-        Aula aula = Aula.crear(
-                request.nombre(),
-                request.capacidad()
-        );
+        validarDatosUnicos(request.nombre());
 
-        validarDatosUnicos(aula.getNombre());
+        Aula aula = aulaMapper.requestAEntidad(request);
 
         aulaRepository.saveAndFlush(aula);
 
@@ -61,12 +58,9 @@ public class AulaServiceImpl implements AulaService{
     public AulaResponseDTO actualizar(AulaRequestDTO request, Long id) {
         Aula aula = obtenerAula(id);
 
-        Aula aulaConCambios = Aula.crear(
-                request.nombre(),
-                request.capacidad()
-        );
+        validarCambiosUnicos(request.nombre(), id);
 
-        validarCambiosUnicos(aulaConCambios.getNombre(), id);
+        Aula aulaConCambios = aulaMapper.requestAEntidad(request);
 
         aula.actualizar(
                 aulaConCambios.getNombre(),
